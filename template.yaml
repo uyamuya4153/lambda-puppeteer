@@ -31,5 +31,8 @@ Resources:
       Timeout: 240
       Description: A Lambda function that returns a static string.
       Policies:
-        # Give Lambda basic execution Permission to the helloFromLambda
         - AWSLambdaBasicExecutionRole
+        - S3ReadPolicy:
+            BucketName: sportsnet-screenshot
+        - S3WritePolicy:
+            BucketName: sportsnet-screenshot
