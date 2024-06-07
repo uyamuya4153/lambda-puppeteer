@@ -20,8 +20,10 @@ export const handler = async (_event: any) => {
  * @returns {Promise<Buffer>} A promise that resolves to a Buffer containing the screenshot of the web page.
  */
 const fetchData = async () => {
+  console.log(1);
   const executablePath =
     process.env.CHROMIUM_EXECUTABLE_PATH ?? (await chromium.executablePath());
+  console.log(2);
 
   const browser = await puppeteer.launch({
     args: chromium.args,
