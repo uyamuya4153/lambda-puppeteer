@@ -7,7 +7,7 @@ esbuild
     bundle: true, // 依存関係をバンドル
     platform: "node",
     target: "node20", // LambdaのNode.jsバージョンに合わせてください
-    external: ["aws-sdk"], // Lambda環境に既に存在するモジュールを除外
+    external: ["@aws-sdk", "@sparticuz"], // Lambda環境に既に存在するモジュールを除外
     loader: {
       ".ts": "ts",
     },

@@ -6,9 +6,11 @@
     "scripts": {
         "build": "node esbuild.config.js",
         "test": "jest",
-        "deploy": "yarn build && sam deploy"
+        "deploy": "yarn build && sam sync --code --no-watch",
+        "deploy:full": "yarn build && sam deploy"
     },
     "devDependencies": {
+        "@aws-sdk/client-s3": "^3.591.0",
         "@sparticuz/chromium": "^123.0.1",
         "@types/jest": "^29.5.12",
         "@types/node": "^20.14.2",
@@ -19,7 +21,6 @@
         "typescript": "^5.4.5"
     },
     "dependencies": {
-        "@aws-sdk/client-s3": "^3.591.0",
         "puppeteer-core": "^22.10.0"
     }
 }

@@ -27,8 +27,8 @@ Resources:
       CodeUri: dist/
       Architectures:
         - x86_64
-      MemorySize: 128
-      Timeout: 240
+      MemorySize: 1024
+      Timeout: 120
       Description: A Lambda function that returns a static string.
       Policies:
         - AWSLambdaBasicExecutionRole
@@ -36,3 +36,5 @@ Resources:
             BucketName: sportsnet-screenshot
         - S3WritePolicy:
             BucketName: sportsnet-screenshot
+      Layers:
+        - arn:aws:lambda:ap-northeast-1:764866452798:layer:chrome-aws-lambda:45
