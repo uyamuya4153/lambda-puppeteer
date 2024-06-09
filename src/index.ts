@@ -16,21 +16,17 @@ export const handler = async (_event: any) => {
  * @returns {Promise<Buffer>} A promise that resolves to a Buffer containing the screenshot of the web page.
  */
 const fetchData = async () => {
-  console.log(`CHROMIUM_EXECUTABLE_PATH: ${process.env.CHROMIUM_EXECUTABLE_PATH}`);
-  console.log(`await chromium.executablePath(): ${await chromium.executablePath()}`);
   const executablePath = process.env.CHROMIUM_EXECUTABLE_PATH ?? (await chromium.executablePath());
-  console.log(2345);
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const day = tomorrow.getDate().toString().padStart(2, '0');
+  const dayOfWeek = ['日', '月', '火', '水', '木', '金', '土'][tomorrow.getDay()];
 
   const browser = await playwright.chromium.launch({
     args: chromium.args,
     executablePath: executablePath,
     headless: false,
   });
-
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const day = tomorrow.getDate().toString().padStart(2, '0');
-  const dayOfWeek = ['日', '月', '火', '水', '木', '金', '土'][tomorrow.getDay()];
 
   const page = await browser.newPage();
   await page.goto('https://sv05.city.toyama.toyama.jp/tymyusr/usr');
@@ -58,12 +54,18 @@ const fetchData = async () => {
  */
 const uploadFileToS3 = async (file: Buffer) => {
   const now = new Date();
+  const year = now.getFullYear();
+  const month = (now.getMonth() + 1).toString().padStart(2, '0');
+  const day = now.getDate().toString().padStart(2, '0');
+  const hour = now.getHours().toString().padStart(2, '0');
+  const minute = now.getMinutes().toString().padStart(2, '0');
+
   const region = 'ap-northeast-1';
   const client = new S3Client({ region });
   const command = new PutObjectCommand({
     Body: file,
     Bucket: 'sportsnet-screenshot',
-    Key: `${now.getFullYear()}/${(now.getMonth() + 1).toString().padStart(2, '0')}${now.getDate().toString().padStart(2, '0')}.png`,
+    Key: `${year}${month}/${day}_${hour}${minute}.png`,
   });
 
   await client.send(command);
