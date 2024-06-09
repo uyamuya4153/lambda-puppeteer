@@ -53,12 +53,13 @@ const fetchData = async () => {
  * @returns A Promise that resolves when the file is successfully uploaded.
  */
 const uploadFileToS3 = async (file: Buffer) => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = (now.getMonth() + 1).toString().padStart(2, '0');
-  const day = now.getDate().toString().padStart(2, '0');
-  const hour = now.getHours().toString().padStart(2, '0');
-  const minute = now.getMinutes().toString().padStart(2, '0');
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const year = tomorrow.getFullYear();
+  const month = (tomorrow.getMonth() + 1).toString().padStart(2, '0');
+  const day = tomorrow.getDate().toString().padStart(2, '0');
+  const hour = tomorrow.getHours().toString().padStart(2, '0');
+  const minute = tomorrow.getMinutes().toString().padStart(2, '0');
 
   const region = 'ap-northeast-1';
   const client = new S3Client({ region });
