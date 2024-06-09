@@ -1,0 +1,14 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://sv05.city.toyama.toyama.jp/');
+  await page.goto('https://sv05.city.toyama.toyama.jp/tymyusr/usr');
+  await page.getByRole('link', { name: '空き状況の確認' }).click();
+  await page.getByRole('row', { name: 'テニス 選 択 バスケットボール 選 択', exact: true }).getByRole('link').first().click();
+  await page.getByRole('row', { name: '東富山運動広場庭球場 人工芝コート 選 択', exact: true }).getByRole('link').click();
+  await page.getByRole('link', { name: '10 (月) 選択' }).click();
+  await page.locator('input[name="ui"]').click();
+  await page.locator('input[name="pw"]').click();
+  await page.locator('input[name="pw"]').fill('4153');
+  await page.getByRole('link', { name: 'ログイン' }).click();
+});

@@ -1,10 +1,9 @@
-process.env.CHROMIUM_EXECUTABLE_PATH =
-  "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+process.env.CHROMIUM_EXECUTABLE_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 
-import { handler } from ".";
+import { handler } from '.';
 
-describe("handler", () => {
-  it("returns success", async () => {
+describe('handler', () => {
+  it('returns success', async () => {
     const result = await handler({});
 
     expect(result).toEqual({
