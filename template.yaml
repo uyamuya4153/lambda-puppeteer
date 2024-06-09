@@ -43,4 +43,4 @@ Resources:
         Schedule1:
           Type: Schedule
           Properties:
-            Schedule: 'cron(55 12 * * ? *)'
+            Schedule: 'cron(30,55,58,59 12 * * ? *)'
